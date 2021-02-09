@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bankal - Compte{% endblock %}
+
+{% block content %}
+<h1>Mon compte</h1>
+<p>Bienvenue {{ app.user.firstname }}</p>
+<a href=" {{ path('account_password') }}"> Modifier le mot de passe</a>
+<br>
+{% endblock %}
