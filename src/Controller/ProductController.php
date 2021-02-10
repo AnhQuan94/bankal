@@ -21,7 +21,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/nos-produits", name="products")
+     * @Route("/produits", name="products")
      */
     public function index(Request $request): Response
     {
