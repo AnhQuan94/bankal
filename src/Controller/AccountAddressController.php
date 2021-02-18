@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Cart;
 use App\Entity\Address;
 use App\Form\AddressType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,7 +59,7 @@ class AccountAddressController extends AbstractController
     /**
      * @Route("/compte/modifier-une-adresse/{id}", name="account_address_edit")
      */
-    public function edit(Request $request, $id)
+    public function edit(Cart $cart, Request $request, $id)
     {
         $address = $this->entityManager->getRepository(Address::class)->findOneById($id);
 
@@ -72,7 +73,13 @@ class AccountAddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            return $this->redirectToRoute('account_address');
+            if ($cart->get()) {
+                return $this->redirectToRoute('order');
+            } else {
+                return $this->redirectToRoute('account_address');
+            }
+
+            
         }
 
         return $this->render('account/address_form.html.twig', [
